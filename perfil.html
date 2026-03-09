@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Licencia</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        .perfil-card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 10px; max-width: 350px; margin: 0 auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        img { max-width: 150px; border-radius: 10px; margin-bottom: 10px; }
+        .estado { font-weight: bold; font-size: 1.2em; margin: 15px 0; padding: 10px; border-radius: 5px; text-transform: uppercase; }
+        .estado.activa { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
+        .estado.inactiva { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; }
+        p { margin: 8px 0; font-size: 15px; color: #333; }
+        button { margin-top: 15px; width: 100%; padding: 12px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; }
+        button:disabled { background-color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="perfil-card" id="perfilContainer" style="display: none;">
+        <img id="p_foto" src="" alt="Foto">
+        
+        <h2 id="p_nombre" style="margin: 10px 0;">Cargando...</h2>
+        <p><strong>Cédula:</strong> <span id="p_cedula"></span></p>
+        
+        <div id="p_estado" class="estado">Cargando estado...</div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+        
+        <p><strong>Tipo de Sangre:</strong> <span id="p_sangre"></span></p>
+        <p><strong>Altura:</strong> <span id="p_altura"></span> | <strong>Peso:</strong> <span id="p_peso"></span></p>
+        <p><strong>Sexo:</strong> <span id="p_sexo"></span></p>
+        <p><strong>F. Nacimiento:</strong> <span id="p_nacimiento"></span></p>
+        <p><strong>F. Emisión:</strong> <span id="p_emision"></span></p>
+        <p><strong>F. Vencimiento:</strong> <span id="p_vencimiento"></span></p>
+        
+        <button id="btnCambiarEstado">Cambiar Estado</button>
+    </div>
+
+    <div id="mensajeError" style="display: none; color: #721c24; background: #f8d7da; padding: 20px; border-radius: 10px; max-width: 350px; margin: 0 auto;">
+        <h3>Usuario no encontrado</h3>
+        <p>Verifique que el código QR sea válido.</p>
+    </div>
+
+    <script type="module" src="perfil.js"></script>
+</body>
+</html>
