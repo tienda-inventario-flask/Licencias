@@ -3,51 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Licencias</title>
+    <title>INTRANT - Registro de Licencias</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: 0 auto; }
-        input, select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        button:disabled { background-color: #6c757d; cursor: not-allowed; }
-        #qrContainer { text-align: center; margin-top: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 0; margin: 0; background-color: #f8f9fa; color: #333; }
+        
+        .hero-section { background-color: #fff; padding: 20px 0; text-align: center; border-bottom: 2px solid #e9ecef; margin-bottom: 30px; }
+        .hero-section img { max-width: 250px; height: auto; margin: 0 auto; display: block; }
+
+        .registration-container { max-width: 600px; margin: 0 auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 50px; }
+
+        h2 { text-align: center; margin-top: 0; color: #0056b3; margin-bottom: 30px;}
+        label { font-weight: bold; display: block; margin-bottom: 5px; color: #555;}
+        input, select { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        input:focus, select:focus { border-color: #007bff; outline: none; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+        
+        button { width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; font-weight: bold; transition: background-color 0.2s;}
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #a0cfff; cursor: not-allowed; }
+
+        #qrContainer { text-align: center; margin-top: 30px; padding: 25px; border: 2px dashed #ccc; border-radius: 10px; background-color: #fff; }
+        #qrContainer h3 { color: #28a745; margin-top: 0;}
     </style>
 </head>
 <body>
-    <h2>Registrar Nueva Licencia</h2>
-    
-    <form id="registroForm">
-        <input type="text" id="nombre_completo" placeholder="Nombre Completo" required>
-        <input type="text" id="cedula" placeholder="Cédula (Sin guiones)" required>
-        <input type="text" id="tipo_sangre" placeholder="Tipo de Sangre (Ej. O+)" required>
-        <input type="text" id="altura" placeholder="Altura (Ej. 1.75m)" required>
-        
-        <select id="sexo" required>
-            <option value="">Seleccione Sexo</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-        </select>
-        
-        <input type="text" id="peso" placeholder="Peso (Ej. 160 lb)" required>
-        
-        <label>Fecha de Nacimiento:</label>
-        <input type="date" id="fecha_nacimiento" required>
-        
-        <label>Fecha de Emisión:</label>
-        <input type="date" id="fecha_emision" required>
-        
-        <label>Fecha de Vencimiento:</label>
-        <input type="date" id="fecha_vencimiento" required>
-        
-        <label>Foto de la persona:</label>
-        <input type="file" id="foto" accept="image/*" required>
-        
-        <button type="submit" id="btnSubmit">Registrar Usuario</button>
-    </form>
 
-    <div id="qrContainer" style="display: none;">
-        <h3>Registro Exitoso</h3>
-        <img id="qrImage" src="" alt="Código QR del Usuario" style="max-width: 200px;">
-        <p>Guarda esta imagen o escanéala para ver el perfil.</p>
+    <div class="hero-section">
+        <img src="logo-intrant.png" alt="Logo INTRANT - Dirección de Tránsito y Vialidad">
+    </div>
+
+    <div class="registration-container">
+        <h2>Registro de Nueva Licencia</h2>
+        
+        <form id="registroForm">
+            <input type="text" id="nombre_completo" placeholder="Nombre Completo" required>
+            <input type="text" id="cedula" placeholder="Cédula (Sin guiones)" required>
+            
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <input type="text" id="tipo_sangre" placeholder="Tipo de Sangre (Ej. O+)" required>
+                </div>
+                <div style="flex: 1;">
+                    <input type="text" id="altura" placeholder="Altura (Ej. 1.75m)" required>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <select id="sexo" required>
+                        <option value="">Seleccione Sexo</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <input type="text" id="peso" placeholder="Peso (Ej. 160 lb)" required>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <label>Fecha de Nacimiento:</label>
+                    <input type="date" id="fecha_nacimiento" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>Fecha de Emisión:</label>
+                    <input type="date" id="fecha_emision" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>Fecha de Vencimiento:</label>
+                    <input type="date" id="fecha_vencimiento" required>
+                </div>
+            </div>
+            
+            <label>Estado Inicial de la Licencia:</label>
+            <select id="estado" required>
+                <option value="Activa">Activa</option>
+                <option value="Inactiva">Inactiva</option>
+            </select>
+
+            <label>Foto de la persona:</label>
+            <input type="file" id="foto" accept="image/*" required>
+            
+            <button type="submit" id="btnSubmit">Registrar Usuario</button>
+        </form>
+
+        <div id="qrContainer" style="display: none;">
+            <h3>¡Registro Exitoso!</h3>
+            <img id="qrImage" src="" alt="Código QR del Usuario" style="max-width: 250px; height: auto; margin: 20px 0;">
+            <p>Guarda esta imagen o escanéala para ver el perfil.</p>
+        </div>
     </div>
 
     <script type="module" src="app.js"></script>

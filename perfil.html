@@ -3,44 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Licencia</title>
+    <title>INTRANT - Perfil de Licencia</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
-        .perfil-card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 10px; max-width: 350px; margin: 0 auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        img { max-width: 150px; border-radius: 10px; margin-bottom: 10px; }
-        .estado { font-weight: bold; font-size: 1.2em; margin: 15px 0; padding: 10px; border-radius: 5px; text-transform: uppercase; }
-        .estado.activa { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
-        .estado.inactiva { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; }
-        p { margin: 8px 0; font-size: 15px; color: #333; }
-        button { margin-top: 15px; width: 100%; padding: 12px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; }
-        button:disabled { background-color: #ccc; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 0; margin: 0; background-color: #f4f7f6; color: #333; text-align: center; }
+        
+        .hero-section { background-color: #fff; padding: 20px 0; text-align: center; border-bottom: 2px solid #e9ecef; margin-bottom: 40px; }
+        .hero-section img { max-width: 200px; height: auto; margin: 0 auto; display: block; }
+
+        .perfil-card { background: white; border: 1px solid #e1e4e8; padding: 40px; border-radius: 15px; max-width: 450px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 50px;}
+        .perfil-card img.user-foto { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 5px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        
+        .estado { font-weight: bold; font-size: 1.3em; margin: 20px 0; padding: 12px; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px;}
+        .estado.activa { color: #fff; background-color: #28a745; border: 1px solid #218838; }
+        .estado.inactiva { color: #fff; background-color: #dc3545; border: 1px solid #c82333; }
+        
+        .perfil-data p { margin: 12px 0; font-size: 16px; color: #444; border-bottom: 1px solid #f1f1f1; padding-bottom: 8px;}
+        .perfil-data p:last-child { border-bottom: none;}
+        .perfil-data strong { color: #000; width: 150px; display: inline-block; text-align: left;}
+
+        hr { border: 0; border-top: 1px solid #eee; margin: 25px 0; }
     </style>
 </head>
 <body>
 
+    <div class="hero-section">
+        <img src="logo-intrant.png" alt="Logo INTRANT">
+    </div>
+
     <div class="perfil-card" id="perfilContainer" style="display: none;">
-        <img id="p_foto" src="" alt="Foto">
+        <img id="p_foto" src="" alt="Foto" class="user-foto">
         
-        <h2 id="p_nombre" style="margin: 10px 0;">Cargando...</h2>
-        <p><strong>Cédula:</strong> <span id="p_cedula"></span></p>
+        <h2 id="p_nombre" style="margin: 10px 0 5px 0; color: #0056b3;">Cargando...</h2>
+        <p style="margin: 0; color: #666;">Cédula: <span id="p_cedula"></span></p>
         
         <div id="p_estado" class="estado">Cargando estado...</div>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-        
-        <p><strong>Tipo de Sangre:</strong> <span id="p_sangre"></span></p>
-        <p><strong>Altura:</strong> <span id="p_altura"></span> | <strong>Peso:</strong> <span id="p_peso"></span></p>
-        <p><strong>Sexo:</strong> <span id="p_sexo"></span></p>
-        <p><strong>F. Nacimiento:</strong> <span id="p_nacimiento"></span></p>
-        <p><strong>F. Emisión:</strong> <span id="p_emision"></span></p>
-        <p><strong>F. Vencimiento:</strong> <span id="p_vencimiento"></span></p>
-        
-        <button id="btnCambiarEstado">Cambiar Estado</button>
+        <div class="perfil-data">
+            <p><strong>Tipo de Sangre:</strong> <span id="p_sangre"></span></p>
+            <p><strong>Altura y Peso:</strong> <span id="p_altura"></span> / <span id="p_peso"></span></p>
+            <p><strong>Sexo:</strong> <span id="p_sexo"></span></p>
+            <p><strong>F. Nacimiento:</strong> <span id="p_nacimiento"></span></p>
+            <p><strong>F. Emisión:</strong> <span id="p_emision"></span></p>
+            <p><strong>F. Vencimiento:</strong> <span id="p_vencimiento"></span></p>
+        </div>
     </div>
 
-    <div id="mensajeError" style="display: none; color: #721c24; background: #f8d7da; padding: 20px; border-radius: 10px; max-width: 350px; margin: 0 auto;">
-        <h3>Usuario no encontrado</h3>
-        <p>Verifique que el código QR sea válido.</p>
+    <div id="mensajeError" style="display: none; color: #721c24; background: #f8d7da; padding: 30px; border-radius: 12px; max-width: 450px; margin: 0 auto; border: 1px solid #f5c6cb;">
+        <h3>⚠️ Usuario No Encontrado</h3>
+        <p>Verifique que el código QR sea válido y que el usuario esté registrado.</p>
     </div>
 
     <script type="module" src="perfil.js"></script>

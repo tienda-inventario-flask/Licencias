@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAOaqzdSVJaVoIJWvfjs1nNGvTK51dtD3U",
@@ -18,10 +18,7 @@ const cedulaBuscada = urlParams.get('cedula');
 
 const perfilContainer = document.getElementById('perfilContainer');
 const mensajeError = document.getElementById('mensajeError');
-const btnCambiarEstado = document.getElementById('btnCambiarEstado');
 const divEstado = document.getElementById('p_estado');
-
-let estadoActual = "";
 
 async function cargarPerfil() {
     if (!cedulaBuscada) {
@@ -47,8 +44,14 @@ async function cargarPerfil() {
             document.getElementById('p_emision').innerText = datos.fecha_emision;
             document.getElementById('p_vencimiento').innerText = datos.fecha_vencimiento;
             
-            estadoActual = datos.estado;
-            actualizarVistaEstado(estadoActual);
+            // Mostrar el estado visual (verde o rojo) pero sin botón
+            const estadoActual = datos.estado;
+            divEstado.innerText = `Licencia ${estadoActual}`;
+            if (estadoActual === "Activa") {
+                divEstado.className = "estado activa";
+            } else {
+                divEstado.className = "estado inactiva";
+            }
 
             perfilContainer.style.display = 'block';
         } else {
@@ -59,39 +62,5 @@ async function cargarPerfil() {
         mensajeError.style.display = 'block';
     }
 }
-
-function actualizarVistaEstado(estado) {
-    divEstado.innerText = `Licencia ${estado}`;
-    if (estado === "Activa") {
-        divEstado.className = "estado activa";
-        btnCambiarEstado.innerText = "Desactivar Licencia";
-        btnCambiarEstado.style.backgroundColor = "#dc3545"; // Botón rojo para desactivar
-    } else {
-        divEstado.className = "estado inactiva";
-        btnCambiarEstado.innerText = "Activar Licencia";
-        btnCambiarEstado.style.backgroundColor = "#28a745"; // Botón verde para activar
-    }
-}
-
-btnCambiarEstado.addEventListener('click', async () => {
-    const nuevoEstado = (estadoActual === "Activa") ? "Inactiva" : "Activa";
-    
-    btnCambiarEstado.disabled = true;
-    btnCambiarEstado.innerText = "Actualizando...";
-
-    try {
-        const docRef = doc(db, "licencias", cedulaBuscada);
-        await updateDoc(docRef, { estado: nuevoEstado });
-
-        estadoActual = nuevoEstado;
-        actualizarVistaEstado(estadoActual);
-
-    } catch (error) {
-        console.error(error);
-        alert("Hubo un error al cambiar el estado.");
-    } finally {
-        btnCambiarEstado.disabled = false;
-    }
-});
 
 cargarPerfil();

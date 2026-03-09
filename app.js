@@ -31,10 +31,10 @@ formulario.addEventListener('submit', async (e) => {
     const nacimiento = document.getElementById('fecha_nacimiento').value;
     const emision = document.getElementById('fecha_emision').value;
     const vencimiento = document.getElementById('fecha_vencimiento').value;
+    const estado = document.getElementById('estado').value; // <-- Capturamos el estado
     const archivoFoto = document.getElementById('foto').files[0];
 
     try {
-        // 1. Subir a ImgBB
         const formData = new FormData();
         formData.append('image', archivoFoto);
 
@@ -49,7 +49,7 @@ formulario.addEventListener('submit', async (e) => {
         if (!datosImgbb.success) throw new Error("Error al subir imagen");
         const fotoURL = datosImgbb.data.url;
 
-        // 2. Guardar en Firebase
+        // Guardar en Firebase con el estado elegido
         await setDoc(doc(db, "licencias", cedula), {
             nombre_completo: nombre,
             cedula: cedula,
@@ -61,10 +61,10 @@ formulario.addEventListener('submit', async (e) => {
             fecha_emision: emision,
             fecha_vencimiento: vencimiento,
             foto_url: fotoURL, 
-            estado: "Activa"
+            estado: estado // <-- Guardamos el estado del formulario
         });
 
-// 3. Generar QR
+        // Generar QR (¡Recuerda mantener tu enlace real de Render!)
         const urlPerfil = `https://intrant-usuarios.onrender.com/perfil.html?cedula=${cedula}`;
         const urlQR = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(urlPerfil)}`;
 
